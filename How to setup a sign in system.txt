@@ -1,0 +1,16 @@
+.::How to make a forum::.
+
+First step, we learn when we use. This tutorial supposes that you know how to program. I guess I am a noob in php as well as you, so let's get started.
+
+I am planning to make a sign in platform, with a sign up option.
+
+First we make the simple sign in part.
+
+1. I needed to look up how to redirect the page, to our will-be home page. 
+header('Location: tothissite.html'); is the way to do it.
+
+2. I am unable to coerce the condition $_POST['name'] == "Zsolt" work. Maybe there is a different way to do things.
+
+3. Of course because PHP is not natively supported by the OS. I need to fire up my local XAMPP...
+
+It finally works!
