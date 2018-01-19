@@ -1,4 +1,7 @@
 <?php
+
+include 'Configuration/databaseConnection.php';
+
 $name = $password = "";
 
 if ($_POST['name'] == "Zsolt")
