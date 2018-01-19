@@ -1,6 +1,12 @@
 <?php
+//Bad style!
 	$nameErr = $emailErr = $genderErr = $passwordErr = $retypedPasswordErr = '';
 	$name = $email = $gender = $password = $retypedPassword = '';
+//Try Arrays like
+$data = array(
+'nameErr' => '',
+//And so far.
+);
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
