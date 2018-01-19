@@ -1,6 +1,6 @@
 <?php
 
-include 'Configuration/databaseConnection.php';
+include 'connection/databaseConnection.php';
 
 $name = $password = "";
 

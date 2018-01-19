@@ -4,9 +4,13 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
+		$everythingIsOk = true;
+		
 		if (empty($name))
 		{
 			$nameErr = '* Name is required!';
+						
+			$everythingIsOk = false;
 		}
 		else
 		{
@@ -16,25 +20,19 @@
 		if (empty($email))
 		{
 			$emailErr = '* Email is required!';
+			
+			$everythingIsOk = false;
 		}
 		else
 		{
 			$email = properOutputFormat($_POST['email']);
-		}
-		
-		if (empty($gender))
-		{
-			$genderErr = '* Gender is required!';
-		}
-		else
-		{
-			$gender = properOutputFormat($_POST['gender']);
-		}
-		
+		}		
 		
 		if (empty($password))
 		{
 			$passwordErr = '* Password is required!';
+			
+			$everythingIsOk = false;
 		}
 		else
 		{
@@ -44,10 +42,25 @@
 		if (empty($retypedPassword))
 		{
 			$retypedPasswordErr = '* Password is required!';
+			
+			$everythingIsOk = false;
 		}
 		else
 		{
 			$retypedPassword = properOutputFormat($_POST['password']);
+		}
+		
+		if ($everythingIsOk == true)
+		{
+			if ($password == $retypedPassword)
+			{
+				require_once 'connection/databaseConnection.php';
+		
+				$sql_statement = $conn->prepare('INSERT INTO users(name, password) VALUES(:name,:password)');
+				$sql_statement->execute(array('name'=>$name,':password'=>$password));
+				
+				header('Location: index.php');
+			}
 		}
 		
 	}
@@ -83,17 +96,9 @@
 	Gender:
 	<input type="radio" name="gender" value="Male"></input>
 	<input type="radio" name="gender" value="Female"></input>
-	<span class="error"> *<?php echo $genderErr; ?></span>
+	<span class="error"> <?php echo $genderErr; ?></span>
+	
 	<br><br>
+	
 	<input type="submit" value="Submit" name="submit"></input>
 </form>
-
-<?php
-	if (isset($_POST['submit']) and ($password == $retypedPassword) and ($password != ''))
-	{
-		require_once 'connection/databaseConnection.php';
-		
-		$sql_statement = $conn->prepare('INSERT INTO users(name, password) VALUES(:name,:password)');
-		$sql_statement->execute(array('name'=>$name,':password'=>$password));
-	}
-?>
