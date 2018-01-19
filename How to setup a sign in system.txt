@@ -1,5 +1,7 @@
 .::How to make a forum::.
 
+.:The beginning of time:.
+
 First step, we learn when we use. This tutorial supposes that you know how to program. I guess I am a noob in php as well as you, so let's get started.
 
 I am planning to make a sign in platform, with a sign up option.
@@ -14,3 +16,13 @@ header('Location: tothissite.html'); is the way to do it.
 3. Of course because PHP is not natively supported by the OS. I need to fire up my local XAMPP...
 
 It finally works!
+
+.:Database is a must:.
+
+I will use mysql.
+
+http://localhost/phpmyadmin/ is the default address for access in the case of XAMPP.
+
+Make a new database with the name testveriseg.
+
+I will use utf8_hungarian_ci as my default character set.
