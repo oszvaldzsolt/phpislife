@@ -47,5 +47,6 @@ Long time no see, let's continue the work. First, by fixing signup page.
 
 The page refuses to save the data to mysql. I need to investigate what is the reason.
 
-Before I began I found out, that the form was bad. The names for the password, and retyped password were wrongfully given.
 I have no idea why it doesn't work. I try to learn laravel, so in future i can develop quicker.
+
+Before I began I found out, that the form was bad. The names for the password, and retyped password were wrongfully given.
