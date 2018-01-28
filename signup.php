@@ -6,7 +6,7 @@
 	{
 		$everythingIsOk = true;
 		
-		if (empty($name))
+		if (empty($_POST["name"]))
 		{
 			$nameErr = '* Name is required!';
 						
@@ -17,7 +17,12 @@
 			$name = properOutputFormat($_POST['name']);
 		}
 		
-		if (empty($email))
+		if ($everythingIsOk == false)
+		{
+			echo '<p>A névnél száll el!</p>';
+		}
+		
+		if (empty($_POST["email"]))
 		{
 			$emailErr = '* Email is required!';
 			
@@ -26,9 +31,14 @@
 		else
 		{
 			$email = properOutputFormat($_POST['email']);
+		}	
+
+		if ($everythingIsOk == false)
+		{
+			echo '<p>Az emailnél száll el!</p>';
 		}		
 		
-		if (empty($password))
+		if (empty($_POST["password"]))
 		{
 			$passwordErr = '* Password is required!';
 			
@@ -39,7 +49,12 @@
 			$password = properOutputFormat($_POST['password']);
 		}
 		
-		if (empty($retypedPassword))
+		if ($everythingIsOk == false)
+		{
+			echo '<p>A passwordnél száll el!</p>';
+		}
+		
+		if (empty($_POST["retypedPassword"]))
 		{
 			$retypedPasswordErr = '* Password is required!';
 			
@@ -50,11 +65,18 @@
 			$retypedPassword = properOutputFormat($_POST['password']);
 		}
 		
+		if ($everythingIsOk == false)
+		{
+			echo '<p>A retyped passwordnél száll el!</p>';
+		}
+		
 		if ($everythingIsOk == true)
 		{
+			
 			if ($password == $retypedPassword)
 			{
-				require_once 'connection/databaseConnection.php';
+				//require_once 'connection/databaseConnection.php';
+				include 'connection/databaseConnection.php';
 		
 				$sql_statement = $conn->prepare('INSERT INTO users(name, password) VALUES(:name,:password)');
 				$sql_statement->execute(array('name'=>$name,':password'=>$password));
@@ -83,12 +105,12 @@
 	
 	<br><br>
 	
-	Password: <input type="text" name="website">
+	Password: <input type="text" name="password">
 	<span class="error"> <?php echo $passwordErr; ?></span>
 	
 	<br><br>
 	
-	Retype password: <input type="text" name="website">
+	Retype password: <input type="text" name="retypedPassword">
 	<span class="error"> <?php echo $retypedPasswordErr; ?></span>
 	
 	<br><br>
