@@ -108,6 +108,8 @@
 				
 				
 				header('Location: index.php');
+				
+				$conn = null;
 			}
 		}
 		
