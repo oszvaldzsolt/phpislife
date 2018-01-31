@@ -65,6 +65,30 @@
 			$retypedPassword = properOutputFormat($_POST['password']);
 		}
 		
+		if (empty($_POST['gender']))
+		{
+			$genderErr = '* Gender is required!';
+			
+			$everythingIsOk = false;
+		}
+		else
+		{
+			$gender = $_POST['gender'];
+			
+			if ($gender == 'male')
+			{
+				$gender = true;
+			}
+			else if ($gender == 'female')
+			{
+				$gender = false;
+			}
+			else 
+			{
+				$gender = NULL;
+			}
+		}
+		
 		if ($everythingIsOk == false)
 		{
 			echo '<p>A retyped passwordnél száll el!</p>';
@@ -76,10 +100,12 @@
 			if ($password == $retypedPassword)
 			{
 				//require_once 'connection/databaseConnection.php';
-				include 'connection/databaseConnection.php';
+				require_once 'connection/databaseConnection.php';
 		
-				$sql_statement = $conn->prepare('INSERT INTO users(name, password) VALUES(:name,:password)');
-				$sql_statement->execute(array('name'=>$name,':password'=>$password));
+				$sql_statement = $conn->prepare('INSERT INTO users(name, password, email, gender) VALUES(:name,:password,:email,:gender)');
+				$sql_statement->execute(array('name'=>$name, 'password'=>$password, 'email'=>$email, 'gender'=>$gender));
+				
+				
 				
 				header('Location: index.php');
 			}
@@ -116,8 +142,8 @@
 	<br><br>
 	
 	Gender:
-	<input type="radio" name="gender" value="Male"></input>
-	<input type="radio" name="gender" value="Female"></input>
+	<input type="radio" name="gender" value="male"></input> Male 
+	<input type="radio" name="gender" value="female"></input> Female 
 	<span class="error"> <?php echo $genderErr; ?></span>
 	
 	<br><br>

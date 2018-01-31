@@ -50,3 +50,10 @@ The page refuses to save the data to mysql. I need to investigate what is the re
 I have no idea why it doesn't work. I try to learn laravel, so in future i can develop quicker.
 
 Before I began I found out, that the form was bad. The names for the password, and retyped password were wrongfully given.
+
+I need to repair the sql side as well, because the lack of columns.
+
+ALTER TABLE users ADD COLUMN email VARCHAR(255);
+ALTER TABLE users ADD COLUMN gender bit;
+
+I need to check if the user is in the database in order to let him/her in.
