@@ -57,3 +57,17 @@ ALTER TABLE users ADD COLUMN email VARCHAR(255);
 ALTER TABLE users ADD COLUMN gender bit;
 
 I need to check if the user is in the database in order to let him/her in.
+
+Regular expressions are fascinating. I found this one for checking if the password is strong:
+
+$regex='/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/';
+
+This is a good site for learning regular expressions:
+http://webcheatsheet.com/php/regular_expressions.php
+
+if (preg_match($regex, $password))
+{
+	echo 'This is a strong password';
+}
+else 
+	echo 'Weak password';

@@ -1,5 +1,5 @@
 <?php
-	$nameErr = $emailErr = $genderErr = $passwordErr = $retypedPasswordErr = '';
+	$nameErr = $emailErr = $genderErr = $passwordErr = $retypedPasswordErr = $passwordExpressionErr = '';
 	$name = $email = $gender = $password = $retypedPassword = '';
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -17,10 +17,10 @@
 			$name = properOutputFormat($_POST['name']);
 		}
 		
-		if ($everythingIsOk == false)
+		/*if ($everythingIsOk == false)
 		{
 			echo '<p>A névnél száll el!</p>';
-		}
+		}*/
 		
 		if (empty($_POST["email"]))
 		{
@@ -33,10 +33,20 @@
 			$email = properOutputFormat($_POST['email']);
 		}	
 
-		if ($everythingIsOk == false)
+		/*if ($everythingIsOk == false)
 		{
 			echo '<p>Az emailnél száll el!</p>';
-		}		
+		}*/		
+		
+		$passwordExpression = "/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/";
+		
+		if (!preg_match($passwordExpression, $_POST['password'])) {
+			
+			$passwordExpressionErr = "* The conditions haven't met";
+			
+			$everythingIsOk = false;
+			
+		}
 		
 		if (empty($_POST["password"]))
 		{
@@ -49,10 +59,10 @@
 			$password = properOutputFormat($_POST['password']);
 		}
 		
-		if ($everythingIsOk == false)
+		/*if ($everythingIsOk == false)
 		{
 			echo '<p>A passwordnél száll el!</p>';
-		}
+		}*/
 		
 		if (empty($_POST["retypedPassword"]))
 		{
@@ -89,10 +99,10 @@
 			}
 		}
 		
-		if ($everythingIsOk == false)
+		/*if ($everythingIsOk == false)
 		{
 			echo '<p>A retyped passwordnél száll el!</p>';
-		}
+		}*/
 		
 		if ($everythingIsOk == true)
 		{
@@ -133,9 +143,16 @@
 	
 	<br><br>
 	
-	Password: <input type="text" name="password">
-	<span class="error"> <?php echo $passwordErr; ?></span>
+	<p>Password needs to contain at least:</p> 
+	<ul>
+		<li>a number</li> 
+		<li>a lower case letter</li> 
+		<li>an upper case letter</li>
+		<li>8 characters</li>
+	</ul>
 	
+	Password: <input type="text" name="password">
+	<span class="error"> <?php echo $passwordErr; ?> <?php echo $passwordExpressionErr; ?> </span>
 	<br><br>
 	
 	Retype password: <input type="text" name="retypedPassword">
